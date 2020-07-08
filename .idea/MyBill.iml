@@ -6,5 +6,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.7 (MyBill)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="PyechartsTest" />
+    <orderEntry type="module" module-name="polaris-api" />
   </component>
 </module>

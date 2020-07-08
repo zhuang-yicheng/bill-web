@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>last month pay</title>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
 </head>
 <body>
-$END$
+    <div id="lastMonth_pay" style="width:1000px; height:600px;"></div>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('lastMonth_pay'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '第一个 ECharts 实例'
+            },
+            tooltip: {},
+            legend: {
+                data:['上月支出']
+            },
+            xAxis: {
+                data: result_json.pay_date
+            },
+            yAxis: {},
+            series: [{
+                name: '上月支出',
+                type: 'bar',
+                data: result_json.price
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        /*
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('lastMonth_pay'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '第一个 ECharts 实例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        */
+    </script>
 </body>
 </html>
