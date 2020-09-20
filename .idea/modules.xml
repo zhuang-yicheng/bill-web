@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/../PyechartsTest/.idea/PyechartsTest.iml" filepath="$PROJECT_DIR$/../PyechartsTest/.idea/PyechartsTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/../flask/.idea/flask.iml" filepath="$PROJECT_DIR$/../flask/.idea/flask.iml" />
       <module fileurl="file://$PROJECT_DIR$/../flask-ansible/.idea/flask-ansible.iml" filepath="$PROJECT_DIR$/../flask-ansible/.idea/flask-ansible.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jira/.idea/jira.iml" filepath="$PROJECT_DIR$/../jira/.idea/jira.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../jirajira/.idea/jirajira.iml" filepath="$PROJECT_DIR$/../jirajira/.idea/jirajira.iml" />
       <module fileurl="file://Z:/工作/小黑卡/xzmx_code/polaris-api/.idea/polaris-api.iml" filepath="Z:/工作/小黑卡/xzmx_code/polaris-api/.idea/polaris-api.iml" />
     </modules>
   </component>

@@ -1,4 +1,4 @@
-from flask import Flask, escape, render_template, request, redirect, url_for
+from flask import Flask, escape, render_template, request, redirect, url_for, jsonify
 from jinja2 import Markup, Environment, FileSystemLoader
 from pyecharts.globals import CurrentConfig
 from .db import get_db, get_conn
@@ -124,26 +124,57 @@ def create_app():
         c = last_month_pay()
         return Markup(c.render_embed())
 
-    @app.route('/lastMonth_pay')
-    def lastMonth_pay():
+    @app.route('/lastMonthPay')
+    def lastMonthPay():
         sql = '''
-                    SELECT
-                        substr(pay_date,1,10) pay_date,
-                        SUM(price)/100 price,
-                        COUNT(id) orders
-                    FROM bill
-                    WHERE pay_date > '2020-06-01'
-                        AND pay_date < '2020-07-01'
-                        AND action = '支出'
-                    GROUP BY 1
-                '''
+            SELECT
+                substr(pay_date,1,10) pay_date,
+                SUM(price)/100 price,
+                COUNT(id) orders
+            FROM bill
+            WHERE pay_date > '2020-06-01'
+                AND pay_date < '2020-07-01'
+                AND action = '支出'
+            GROUP BY 1
+        '''
         conn = get_conn()
         df = pd.read_sql(sql, conn)
         data = {}
         data['pay_date'] = df['pay_date'].tolist()
         data['price'] = df['price'].tolist()
         data['orders'] = df['orders'].tolist()
+        print(type(data))
         print(data)
-        return render_template('lastMonth_pay.html', result_json = json.dumps(data))
+        return render_template('lastMonthPay.html', result = data)
+
+    @app.route('/test_post/nn', methods=['GET', 'POST'])  # 路由
+    def test_post():
+        testInfo = {}
+        testInfo['name'] = 'xiaozhaung'
+        testInfo['age'] = '24'
+        return json.dumps(testInfo)
+
+    @app.route('/ajax')
+    def ajax():
+        sql = '''
+                SELECT
+                    substr(pay_date,1,10) pay_date,
+                    SUM(price)/100 price,
+                    COUNT(id) orders
+                FROM bill
+                WHERE pay_date > '2020-06-01'
+                    AND pay_date < '2020-07-01'
+                    AND action = '支出'
+                GROUP BY 1
+            '''
+        conn = get_conn()
+        df = pd.read_sql(sql, conn)
+        data = {}
+        data['pay_date'] = df['pay_date'].tolist()
+        data['price'] = df['price'].tolist()
+        data['orders'] = df['orders'].tolist()
+        print(type(data))
+        print(data)
+        return json.dumps(data)
 
     return app
