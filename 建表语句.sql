@@ -86,7 +86,9 @@ create table alipay_origin_zhuangyc
     service_charge        varchar(20)  null comment '服务费（元）',
     refund                varchar(20)  null comment '成功退款',
     remark                varchar(255) null comment '备注',
-    fund_status           varchar(20)  null comment '资金状态'
+    fund_status           varchar(20)  null comment '资金状态',
+    crsj				  timestamp default CURRENT_TIMESTAMP null comment '数据插入时间',
+    gxsj				  timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '数据插入时间'
 );
 
 create index index_created_time
