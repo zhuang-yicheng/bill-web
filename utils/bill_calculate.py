@@ -47,28 +47,39 @@ def writePartOriginData(df, table_name):
     for i, row in df[df['existed']=='no'].iterrows():
         data_list = row.tolist()
 
-        sql = 'select `transaction_number` from `{}` where `transaction_number` = "{}";'.format(
-            table_name, data_list[0]
-        )下·
-        cur.execute(sql)
-        res = cur.fetchone()
-        # print(res)
-        if res != None:
-            delete_list.append(res[0])
-
         insert_element = eval('(' + str(data_list)[1:-1] + ')')
         insert_list.append(insert_element)
 
-    delete_sql = 'DELETE FROM `{}` WHERE `transaction_number` IN ({});'.format(
-        table_name, str(delete_list)[1:-1]
-    )
-    cur.execute(delete_sql)
-
     insert_sql = '''
-        INSERT INTO `{}`  (`transaction_number`,`merchant_order_number`,`created_time`,`pay_time`,`updated_time`,
-            `origin`,`type`,`counter_party`,`commodity`,`amount`,`in_exp`,`status`,`service_charge`,`refund`,`remark`,`fund_status`
-        )
-        VALUES {};
-    '''.format(table_name, str(insert_list)[1:-1])
+            INSERT INTO `{}`  (`transaction_number`,`merchant_order_number`,`created_time`,`pay_time`,`updated_time`,
+                `origin`,`type`,`counter_party`,`commodity`,`amount`,`in_exp`,`status`,`service_charge`,`refund`,`remark`,`fund_status`
+            )
+            VALUES {};
+        '''.format(table_name, str(insert_list)[1:-1])
     cur.execute(insert_sql)
+
+    for i, row in df[df['existed']=='yes'].iterrows():
+        data_list = row.tolist()
+
+        update_sql = f'''
+            UPDATE `{table_name}` SET
+                `merchant_order_number` = "{data_list[1]}",
+                `created_time` = "{data_list[2]}",
+                `pay_time` = "{data_list[3]}",
+                `updated_time` = "{data_list[4]}",
+                `origin` = "{data_list[5]}",
+                `type` = "{data_list[6]}",
+                `counter_party` = "{data_list[7]}",
+                `commodity` = "{data_list[8]}",
+                `amount` = "{data_list[9]}",
+                `in_exp` = "{data_list[10]}",
+                `status` = "{data_list[11]}",
+                `service_charge` = "{data_list[12]}",
+                `refund` = "{data_list[13]}",
+                `remark` = "{data_list[14]}",
+                `fund_status` = "{data_list[15]}"
+            WHERE `transaction_number` = "{data_list[0]}";
+        '''
+        cur.execute(update_sql)
+
     conn.close()

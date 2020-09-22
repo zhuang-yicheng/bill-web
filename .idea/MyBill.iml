@@ -7,8 +7,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="PyechartsTest" />
-    <orderEntry type="module" module-name="polaris-api" />
-    <orderEntry type="module" module-name="jira" />
     <orderEntry type="module" module-name="jirajira" />
   </component>
 </module>
